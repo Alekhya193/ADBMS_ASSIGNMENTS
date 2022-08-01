@@ -1,0 +1,255 @@
+
+
+
+db.createCollection("Instructor");
+{ "ok" : 1 }
+
+db.Instructor.insert({id:1,name:{fname:"usha",lname:"siddi"},address:{city:"solapur",state:"MH"},department:"IT",salary:10000,status:"approved"});
+WriteResult({ "nInserted" : 1 })
+
+> db.Instructor.insert({id:2,name:{fname:"arpita",lname:"mohrai"},address:{city:"pune",state:"MH"},department:"comp",salary:20000,status:"approved"});
+WriteResult({ "nInserted" : 1 })
+
+> db.Instructor.insert({id:3,name:{fname:"sakshi",lname:"shetty"},address:{city:"mangloru",state:"bgl"},department:"entc",salary:15000,status:"notapproved"});
+WriteResult({ "nInserted" : 1 })
+
+> db.Instructor.insert({id:4,name:{fname:"alekhya",lname:"siddi"},address:{city:"pune",state:"mh"},department:"IT",salary:70000,status:"approved"});
+WriteResult({ "nInserted" : 1 })
+
+db.Instructor.insert({id:5,name:{fname:"vaishnavi",lname:"kulkarni"},address:{city:"pune",state:"mh"},department:"comp",salary:70000,status:"approved"});
+WriteResult({ "nInserted" : 1 })
+
+> db.Instructor.insert({id:6,name:{fname:"rashmi",lname:"bts"},address:{city:"pune",state:"mh"},department:"comp",salary:50000,status:"notapproved"});
+WriteResult({ "nInserted" : 1 })
+
+db.Instructor.insert({id:7,name:{fname:"gaurav",lname:"marathe"},address:{city:"pune",state:"mh"},department:"IT",salary:30000,status:"notapproved"});
+WriteResult({ "nInserted" : 1 })
+
+> db.Instructor.insert({id:8,name:{fname:"darshan",lname:"rajput"},address:{city:"pune",state:"mh"},department:"comp",salary:80000,status:"approved"});
+
+> db.Instructor.insert({id:9,name:{fname:"shantanu",lname:"vaidya"},address:{city:"pune",state:"mh"},department:"IT",salary:50000,status:"approved"});
+WriteResult({ "nInserted" : 1 })
+
+> db.Instructor.insert({id:10,name:{fname:"samhitha",lname:"siddi"},address:{city:"bgl",state:"bgl"},department:"IT",salary:90000,status:"approved"});
+WriteResult({ "nInserted" : 1 })
+
+> db.Instructor.find().pretty();
+{
+	"_id" : ObjectId("62e27876ebdcd922e9116dad"),
+	"id" : 1,
+	"name" : {
+		"fname" : "usha",
+		"lname" : "siddi"
+	},
+	"address" : {
+		"city" : "solapur",
+		"state" : "MH"
+	},
+	"department" : "IT",
+	"salary" : 10000,
+	"status" : "approved"
+}
+{
+	"_id" : ObjectId("62e27908ebdcd922e9116dae"),
+	"id" : 2,
+	"name" : {
+		"fname" : "arpita",
+		"lname" : "mohrai"
+	},
+	"address" : {
+		"city" : "pune",
+		"state" : "MH"
+	},
+	"department" : "comp",
+	"salary" : 20000,
+	"status" : "approved"
+}
+{
+	"_id" : ObjectId("62e27992ebdcd922e9116daf"),
+	"id" : 3,
+	"name" : {
+		"fname" : "sakshi",
+		"lname" : "shetty"
+	},
+	"address" : {
+		"city" : "mangloru",
+		"state" : "bgl"
+	},
+	"department" : "entc",
+	"salary" : 15000,
+	"status" : "notapproved"
+}
+{
+	"_id" : ObjectId("62e27a50ebdcd922e9116db1"),
+	"id" : 4,
+	"name" : {
+		"fname" : "alekhya",
+		"lname" : "siddi"
+	},
+	"address" : {
+		"city" : "pune",
+		"state" : "mh"
+	},
+	"department" : "IT",
+	"salary" : 70000,
+	"status" : "approved"
+}
+{
+	"_id" : ObjectId("62e27bf4ebdcd922e9116db2"),
+	"id" : 5,
+	"name" : {
+		"fname" : "vaishnavi",
+		"lname" : "kulkarni"
+	},
+	"address" : {
+		"city" : "pune",
+		"state" : "mh"
+	},
+	"department" : "comp",
+	"salary" : 70000,
+	"status" : "approved"
+}
+{
+	"_id" : ObjectId("62e27c5cebdcd922e9116db3"),
+	"id" : 6,
+	"name" : {
+		"fname" : "rashmi",
+		"lname" : "bts"
+	},
+	"address" : {
+		"city" : "pune",
+		"state" : "mh"
+	},
+	"department" : "comp",
+	"salary" : 50000,
+	"status" : "notapproved"
+}
+{
+	"_id" : ObjectId("62e27d28ebdcd922e9116db6"),
+	"id" : 7,
+	"name" : {
+		"fname" : "gaurav",
+		"lname" : "marathe"
+	},
+	"address" : {
+		"city" : "pune",
+		"state" : "mh"
+	},
+	"department" : "IT",
+	"salary" : 30000,
+	"status" : "notapproved"
+}
+{
+	"_id" : ObjectId("62e27d65ebdcd922e9116db7"),
+	"id" : 8,
+	"name" : {
+		"fname" : "darshan",
+		"lname" : "rajput"
+	},
+	"address" : {
+		"city" : "pune",
+		"state" : "mh"
+	},
+	"department" : "comp",
+	"salary" : 80000,
+	"status" : "approved"
+}
+{
+	"_id" : ObjectId("62e27dd3ebdcd922e9116db8"),
+	"id" : 9,
+	"name" : {
+		"fname" : "shantanu",
+		"lname" : "vaidya"
+	},
+	"address" : {
+		"city" : "pune",
+		"state" : "mh"
+	},
+	"department" : "IT",
+	"salary" : 50000,
+	"status" : "approved"
+}
+{
+	"_id" : ObjectId("62e27e1bebdcd922e9116db9"),
+	"id" : 10,
+	"name" : {
+		"fname" : "samhitha",
+		"lname" : "siddi"
+	},
+	"address" : {
+		"city" : "bgl",
+		"state" : "bgl"
+	},
+	"department" : "IT",
+	"salary" : 90000,
+	"status" : "approved"
+}
+
+1)find details of instructor who are working in It dept?
+db.Instructor.find({department:"IT"}).pretty();
+
+2)find details of instructor who are working in comp dept?
+db.Instructor.find({department:"comp"}).pretty();
+
+3)find details of instructor who are approve staff?
+db.Instructor.find({status:"approved"}).pretty();
+
+4)find details of instructor whose salary is greater than 50k?
+db.Instructor.find({salary:{$gt:50000}}).pretty();
+
+5)find details of instructor whose salary is exact 50k?
+db.Instructor.find({salary:50000}).pretty();
+
+6)Remove details of instructor whose salary is less than 50k?
+db.Instructor.remove({salary:{$lt:50000}});
+WriteResult({ "nRemoved" : 1 })
+
+7)find details of instructor who are living in pune?
+db.Instructor.find({"address.city":"pune"}).pretty();
+
+8)find details of instructor whose salary is greater than equal to 70k?
+db.Instructor.find({salary:{$gte:70000}}).pretty();
+
+9)find details of instructor whose salary is greater than 40k and less than 80k?
+db.Instructor.find({salary:{$gt:40000,$lt:80000}}).pretty();
+
+10)find details of instructor whose first name is alekhya?
+db.Instructor.find({"name.fname":"alekhya"}).pretty();
+
+11)Give the count of instructor who are working in computer department?
+db.Instructor.count({department:"comp"});
+3
+
+12)find details of instructor whose last name is siddi?
+> db.Instructor.find({"name.lname":"siddi"}).pretty();
+{
+	"_id" : ObjectId("62e27a50ebdcd922e9116db1"),
+	"id" : 4,
+	"name" : {
+		"fname" : "alekhya",
+		"lname" : "siddi"
+	},
+	"address" : {
+		"city" : "pune",
+		"state" : "mh"
+	},
+	"department" : "IT",
+	"salary" : 70000,
+	"status" : "approved"
+}
+{
+	"_id" : ObjectId("62e27e1bebdcd922e9116db9"),
+	"id" : 10,
+	"name" : {
+		"fname" : "samhitha",
+		"lname" : "siddi"
+	},
+	"address" : {
+		"city" : "bgl",
+		"state" : "bgl"
+	},
+	"department" : "IT",
+	"salary" : 90000,
+	"status" : "approved"
+}
+
