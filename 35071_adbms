@@ -986,6 +986,91 @@ WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 }
 
 
+______________________________________________________________________________________________________________________________
+24)upsert:- (update+insert)
+
+{
+	"_id" : ObjectId("62f3452e99a1c7564dd409f5"),
+	"id" : 15,
+	"name" : {
+		"fname" : "emily",
+		"lname" : "paris"
+	},
+	"address" : {
+		"city" : "pune",
+		"state" : "MH"
+	},
+	"department" : "IT",
+	"salary" : 90000,
+	"status" : "approved",
+	"phno" : 8275225229
+}
+> db.Instructor.update({id:15},{$set:{department:'data'}},{upsert:true});
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+
+{
+	"_id" : ObjectId("62f3452e99a1c7564dd409f5"),
+	"id" : 15,
+	"name" : {
+		"fname" : "emily",
+		"lname" : "paris"
+	},
+	"address" : {
+		"city" : "pune",
+		"state" : "MH"
+	},
+	"department" : "data",
+	"salary" : 90000,
+	"status" : "approved",
+	"phno" : 8275225229
+	
+}
+
+> db.Instructor.update({id:15},{$set:{department:'da',salary:11111}},{upsert:true});
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+
+{
+	"_id" : ObjectId("62f3452e99a1c7564dd409f5"),
+	"id" : 15,
+	"name" : {
+		"fname" : "emily",
+		"lname" : "paris"
+	},
+	"address" : {
+		"city" : "pune",
+		"state" : "MH"
+	},
+	"department" : "da",
+	"salary" : 11111,
+	"status" : "approved",
+	"phno" : 8275225229,
+	"dept" : "mech"
+}
+
+> db.Instructor.update({id:16},{$set:{name:{fname:"jj",lname:"gg"},address:{city:"srinagar",state:"kashmir"},status:"approved",phno:123456789,department:'AI',salary:9999}},{upsert:true});
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+
+{
+	"_id" : ObjectId("62fc8516e8c8fce289bf3528"),
+	"id" : 16,
+	"department" : "AI",
+	"salary" : 9999,
+	"address" : {
+		"city" : "srinagar",
+		"state" : "kashmir"
+	},
+	"name" : {
+		"fname" : "jj",
+		"lname" : "gg"
+	},
+	"phno" : 123456789,
+	"status" : "approved"
+}
+
+
+
+
+
 
 
 
