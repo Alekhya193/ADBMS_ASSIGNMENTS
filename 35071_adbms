@@ -1067,6 +1067,146 @@ WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 	"status" : "approved"
 }
 
+_________________________________________________________________________________________________
+
+25)find instructors with salary less than 50k and dept as comp.
+> db.Instructor.find({$and:[{salary:{$lt:50000}},{dept:"mech"}]}).pretty();
+{
+	"_id" : ObjectId("62f3452e99a1c7564dd409f5"),
+	"id" : 15,
+	"name" : {
+		"fname" : "emily",
+		"lname" : "paris"
+	},
+	"address" : {
+		"city" : "pune",
+		"state" : "MH"
+	},
+	"department" : "da",
+	"salary" : 11111,
+	"status" : "approved",
+	"phno" : 8275225229,
+	"dept" : "mech"
+}
+
+
+
+26) addToSet: Add phone number to id 11
+> db.Instructor.update({id:11},{$addToSet:{phno:999229922}});
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+
+{
+	"_id" : ObjectId("62f3434799a1c7564dd409f1"),
+	"id" : 11,
+	"name" : {
+		"fname" : "emma",
+		"lname" : "watson"
+	},
+	"address" : {
+		"city" : "pune",
+		"state" : "MH"
+	},
+	"department" : "IT",
+	"salary" : 60000,
+	"status" : "approved",
+	"phno" : [
+		7356376684,
+		8475048654,
+		999229922
+	]
+}
+
+
+
+27)Change attribute of department to dept (to change the attributes if their is any mistake while typing)
+> db.Instructor.update({id:16},{$rename:{'department':'dept'}});
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+{
+	"_id" : ObjectId("62fc8516e8c8fce289bf3528"),
+	"id" : 16,
+	"department" : "AI",
+	"salary" : 9999,
+	"address" : {
+		"city" : "srinagar",
+		"state" : "kashmir"
+	},
+	"name" : {
+		"fname" : "jj",
+		"lname" : "gg"
+	},
+	"phno" : 123456789,
+	"status" : "approved"
+}
+
+{
+	"_id" : ObjectId("62fc8516e8c8fce289bf3528"),
+	"id" : 16,
+	"salary" : 9999,
+	"address" : {
+		"city" : "srinagar",
+		"state" : "kashmir"
+	},
+	"name" : {
+		"fname" : "jj",
+		"lname" : "gg"
+	},
+	"phno" : 123456789,
+	"status" : "approved",
+	"dept" : "AI"
+}
+
+
+28) display the first name of instructor with city where salary > 30k
+> db.Instructor.find({salary:{$gt:30000}},{"name.fname":1,"address.city":1});
+{ "_id" : ObjectId("62e27a50ebdcd922e9116db1"), "name" : { "fname" : "alekhya" }, "address" : { "city" : "pune" } }
+{ "_id" : ObjectId("62e27bf4ebdcd922e9116db2"), "name" : { "fname" : "vaishnavi" }, "address" : { "city" : "pune" } }
+{ "_id" : ObjectId("62e27c5cebdcd922e9116db3"), "name" : { "fname" : "rashmi" }, "address" : { "city" : "pune" } }
+{ "_id" : ObjectId("62e27d65ebdcd922e9116db7"), "name" : { "fname" : "darshan" }, "address" : { "city" : "pune" } }
+{ "_id" : ObjectId("62e27dd3ebdcd922e9116db8"), "name" : { "fname" : "shantanu" }, "address" : { "city" : "pune" } }
+{ "_id" : ObjectId("62e27e1bebdcd922e9116db9"), "name" : { "fname" : "samhitha" }, "address" : { "city" : "bgl" } }
+{ "_id" : ObjectId("62f3434799a1c7564dd409f1"), "name" : { "fname" : "emma" }, "address" : { "city" : "pune" } }
+{ "_id" : ObjectId("62f343bd99a1c7564dd409f2"), "name" : { "fname" : "daniel" }, "address" : { "city" : "solapur" } }
+{ "_id" : ObjectId("62f3441a99a1c7564dd409f3"), "name" : { "fname" : "ron" }, "address" : { "city" : "pune" } }
+
+
+29)findOne: similar to pretty
+> db.Instructor.findOne({"address.city":"pune"});
+{
+	"_id" : ObjectId("62e27a50ebdcd922e9116db1"),
+	"id" : 4,
+	"name" : {
+		"fname" : "alekhya",
+		"lname" : "siddi"
+	},
+	"address" : {
+		"city" : "pune",
+		"state" : "mh"
+	},
+	"department" : "IT",
+	"salary" : 70000,
+	"status" : "approved"
+}
+
+
+30) $in :find information about instructors whose id's are 4 5 6........ .({id:{$in:[4,5,6]}}) it will show only id 4 5 6
+> db.Instructor.find({id:{$in:[4,5,6]}});
+
+{ "_id" : ObjectId("62e27a50ebdcd922e9116db1"), "id" : 4, "name" : { "fname" : "alekhya", "lname" : "siddi" }, "address" : { "city" : "pune", "state" : "mh" }, "department" : "IT", "salary" : 70000, "status" : "approved" }
+{ "_id" : ObjectId("62e27bf4ebdcd922e9116db2"), "id" : 5, "name" : { "fname" : "vaishnavi", "lname" : "kulkarni" }, "address" : { "city" : "pune", "state" : "mh" }, "department" : "comp", "salary" : 70000, "status" : "approved" }
+{ "_id" : ObjectId("62e27c5cebdcd922e9116db3"), "id" : 6, "name" : { "fname" : "rashmi", "lname" : "bts" }, "address" : { "city" : "pune", "state" : "mh" }, "department" : "comp", "salary" : 50000, "status" : "notapproved" }
+
+
+31) $nin : find information about instructors whose id's are not 4 5 6
+> db.Instructor.find({id:{$nin:[4,5,6]}});
+
+
+32) $not : find instructors whose salary is not greater than 30k
+> db.Instructor.find({salary:{$not:{$gt:30000}}}).pretty();
+
+33) $nor : find instructors with salary either less than 50k nor dept as comp.
+> db.Instructor.find({$nor:[{salary:{$lt:50000}},{dept:"mech"}]}).pretty();
+
+
 
 
 
