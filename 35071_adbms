@@ -1206,6 +1206,192 @@ WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 33) $nor : find instructors with salary either less than 50k nor dept as comp.
 > db.Instructor.find({$nor:[{salary:{$lt:50000}},{dept:"mech"}]}).pretty();
 
+_________________________________________________________________________________________________________________________________________
+_____________________________________________________________________________________________________________________________________
+
+34)add new attribute in the exisiting collection
+> db.Instructor.update({id:4},{$set:{email:'abc@gmail.com'}});
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+
+{
+	"_id" : ObjectId("62e27a50ebdcd922e9116db1"),
+	"id" : 4,
+	"name" : {
+		"fname" : "alekhya",
+		"lname" : "siddi"
+	},
+	"address" : {
+		"city" : "pune",
+		"state" : "mh"
+	},
+	"department" : "IT",
+	"salary" : 70000,
+	"status" : "approved",
+	"email" : "abc@gmail.com"
+}
+
+
+imp-->35)display instructor id along with dept
+> db.Instructor.find({},{id:1,department:1});
+{ "_id" : ObjectId("62e27a50ebdcd922e9116db1"), "id" : 4, "department" : "IT" }
+{ "_id" : ObjectId("62e27bf4ebdcd922e9116db2"), "id" : 5, "department" : "comp" }
+{ "_id" : ObjectId("62e27c5cebdcd922e9116db3"), "id" : 6, "department" : "comp" }
+{ "_id" : ObjectId("62e27d65ebdcd922e9116db7"), "id" : 8, "department" : "comp" }
+{ "_id" : ObjectId("62e27dd3ebdcd922e9116db8"), "id" : 9, "department" : "IT" }
+{ "_id" : ObjectId("62e27e1bebdcd922e9116db9"), "id" : 10, "department" : "IT" }
+{ "_id" : ObjectId("62f3434799a1c7564dd409f1"), "id" : 11, "department" : "IT" }
+{ "_id" : ObjectId("62f343bd99a1c7564dd409f2"), "id" : 12, "department" : "IT" }
+{ "_id" : ObjectId("62f3441a99a1c7564dd409f3"), "id" : 13, "department" : "IT" }
+{ "_id" : ObjectId("62f344d899a1c7564dd409f4"), "id" : 14, "department" : "IT" }
+{ "_id" : ObjectId("62f3452e99a1c7564dd409f5"), "id" : 15, "department" : "da" }
+{ "_id" : ObjectId("62fc8516e8c8fce289bf3528"), "id" : 16 }
+
+
+36)find inst id, first name along with salary where salary is greater then 50k
+> db.Instructor.find({salary:{$gt:50000}},{id:1,department:1,salary:1}).pretty();
+{
+	"_id" : ObjectId("62e27a50ebdcd922e9116db1"),
+	"id" : 4,
+	"department" : "IT",
+	"salary" : 70000
+}
+{
+	"_id" : ObjectId("62e27bf4ebdcd922e9116db2"),
+	"id" : 5,
+	"department" : "comp",
+	"salary" : 70000
+}
+{
+	"_id" : ObjectId("62e27d65ebdcd922e9116db7"),
+	"id" : 8,
+	"department" : "comp",
+	"salary" : 80000
+}
+{
+	"_id" : ObjectId("62e27e1bebdcd922e9116db9"),
+	"id" : 10,
+	"department" : "IT",
+	"salary" : 90000
+}
+{
+	"_id" : ObjectId("62f3434799a1c7564dd409f1"),
+	"id" : 11,
+	"department" : "IT",
+	"salary" : 60000
+}
+{
+	"_id" : ObjectId("62f3441a99a1c7564dd409f3"),
+	"id" : 13,
+	"department" : "IT",
+	"salary" : 80000
+}
+
+
+37)find details of inst where salary is greater then 30k and dept includes it,comp (and $)
+ >>>>>>>>>>>>>>>db.Instructor.find({$and:[{salary:{$lt:50000}},{dept:"mech"}]}).pretty();
+ >>>>>>>>>>>>>>>db.Instructor.find({id:{$nin:[4,5,6]}});
+ 
+> db.Instructor.find({$and:[{salary:{$gt:30000}},{department:{$in:['IT','comp']}}]}).pretty();
+
+38)find details of inst where status is approved and dept does not include it
+> db.Instructor.find({$and:[{status:"approved"},{department:{$nin:['IT']}}]}).pretty();
+
+39)display the details of inst where dept name has substring e
+> db.Instructor.find({dept:/e/i}).pretty();
+{
+	"_id" : ObjectId("62f3452e99a1c7564dd409f5"),
+	"id" : 15,
+	"name" : {
+		"fname" : "emily",
+		"lname" : "paris"
+	},
+	"address" : {
+		"city" : "pune",
+		"state" : "MH"
+	},
+	"department" : "da",
+	"salary" : 11111,
+	"status" : "approved",
+	"phno" : 8275225229,
+	"dept" : "mech"
+}
+
+40)display details of inst where city has substring n
+> db.Instructor.find({"address.city":/n/i}).pretty();
+
+41)find the details of inst where dept has substring omp and e
+> db.Instructor.find({department:{$in:[/omp/,/a/]}}).pretty();
+{
+	"_id" : ObjectId("62e27bf4ebdcd922e9116db2"),
+	"id" : 5,
+	"name" : {
+		"fname" : "vaishnavi",
+		"lname" : "kulkarni"
+	},
+	"address" : {
+		"city" : "pune",
+		"state" : "mh"
+	},
+	"department" : "comp",
+	"salary" : 70000,
+	"status" : "approved"
+}
+
+
+{
+	"_id" : ObjectId("62f3452e99a1c7564dd409f5"),
+	"id" : 15,
+	"name" : {
+		"fname" : "emily",
+		"lname" : "paris"
+	},
+	"address" : {
+		"city" : "pune",
+		"state" : "MH"
+	},
+	"department" : "da",
+	"salary" : 11111,
+	"status" : "approved",
+	"phno" : 8275225229,
+	"dept" : "mech"
+}
+
+42)display details of inst where dept should start with c and ends at p
+> db.Instructor.find({department:/c.*p/}).pretty();
+{
+	"_id" : ObjectId("62e27bf4ebdcd922e9116db2"),
+	"id" : 5,
+	"name" : {
+		"fname" : "vaishnavi",
+		"lname" : "kulkarni"
+	},
+	"address" : {
+		"city" : "pune",
+		"state" : "mh"
+	},
+	"department" : "comp",
+	"salary" : 70000,
+	"status" : "approved"
+}
+
+43) find inst id ,first name and dept where salary greater than 50k and status is approved
+> db.Instructor.find({$and:[{salary:{$gt:50000}},{status:"approved"}]},{id:1,"name.fname":1,department:1}).pretty();
+{
+	"_id" : ObjectId("62e27a50ebdcd922e9116db1"),
+	"id" : 4,
+	"name" : {
+		"fname" : "alekhya"
+	},
+	"department" : "IT"
+}
+{
+	"_id" : ObjectId("62e27bf4ebdcd922e9116db2"),
+	"id" : 5,
+	"name" : {
+		"fname" : "vaishnavi"
+	},
+	"department" : "comp"
+}
 
 
 
