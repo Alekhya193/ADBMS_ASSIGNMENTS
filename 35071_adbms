@@ -1393,7 +1393,97 @@ imp-->35)display instructor id along with dept
 	"department" : "comp"
 }
 
+____________________________________________________________________________________________________________________________
 
+44)find the details of inst who don't have email address.
+> db.Instructor.update({id:4},{$set:{email:null}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.Instructor.find().pretty();
+{
+	"_id" : ObjectId("62e27a50ebdcd922e9116db1"),
+	"id" : 4,
+	"name" : {
+		"fname" : "alekhya",
+		"lname" : "siddi"
+	},
+	"address" : {
+		"city" : "pune",
+		"state" : "mh"
+	},
+	"department" : "IT",
+	"salary" : 70000,
+	"status" : "approved",
+	"email" : null
+}
+
+45)find the instructor where email is null
+> db.Instructor.find({email:null});
+{ "_id" : ObjectId("62e27a50ebdcd922e9116db1"), "id" : 4, "name" : { "fname" : "alekhya", "lname" : "siddi" }, "address" : { "city" : "pune", "state" : "mh" }, "department" : "IT", "salary" : 70000, "status" : "approved", "email" : null }
+{ "_id" : ObjectId("62e27bf4ebdcd922e9116db2"), "id" : 5, "name" : { "fname" : "vaishnavi", "lname" : "kulkarni" }, "address" : { "city" : "pune", "state" : "mh" }, "department" : "comp", "salary" : 70000, "status" : "approved" }
+
+
+46)
+> db.Instructor.find({email:{$in:[null],$exists:true}})
+{ "_id" : ObjectId("62e27a50ebdcd922e9116db1"), "id" : 4, "name" : { "fname" : "alekhya", "lname" : "siddi" }, "address" : { "city" : "pune", "state" : "mh" }, "department" : "IT", "salary" : 70000, "status" : "approved", "email" : null }
+
+47)find the details of instructor where status is approved and dept is not equal IT
+#db.Instructor.find({$and:[{salary:{$gt:50000}},{status:"approved"}]},{id:1,"name.fname":1,department:1}).pretty();
+
+#db.Instructor.find({department:{$in:[/omp/,/a/]}}).pretty();
+
+48)sort first five documents in decending order with respective instructor
+> db.Instructor.find().sort({salary:1}).pretty();
+
+
+
+49)display the details of instructors who have exactly one phone number
+> db.Instructor.find({phno:{$size:1}}).pretty(); 
+>>>>>>>if the phone num is in array then ony it will print
+
+50)display the details of instructors who have exactly two phone numbers
+> db.Instructor.find({phno:{$size:2}}).pretty();
+{
+	"_id" : ObjectId("62f343bd99a1c7564dd409f2"),
+	"id" : 12,
+	"name" : {
+		"fname" : "daniel",
+		"lname" : "radiclif"
+	},
+	"address" : {
+		"city" : "solapur",
+		"state" : "MH"
+	},
+	"department" : "IT",
+	"salary" : 40000,
+	"status" : "notapproved",
+	"phno" : [
+		9876545678,
+		8787654321
+	]
+}
+{
+	"_id" : ObjectId("62f344d899a1c7564dd409f4"),
+	"id" : 14,
+	"name" : {
+		"fname" : "harry",
+		"lname" : "potter"
+	},
+	"address" : {
+		"city" : "nagpur",
+		"state" : "MH"
+	},
+	"department" : "IT",
+	"salary" : 30000,
+	"status" : "approved",
+	"phno" : [
+		6746372647,
+		8726473856
+	]
+}
+
+51)add one more phone number to instructor id 1
+
+slice: db.Instructor.find({id:1},{phone:{$slice:1}});
 
 
 
